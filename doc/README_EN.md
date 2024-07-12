@@ -43,6 +43,9 @@ const app = createApp(App);
 const uploadLog: UploadLogFunction = (action, type, data) => {
   // Implement your log upload logic
   console.log(`Upload log: action=${action}, type=${type}, data=`, data);
+  if (type === 'duration') {
+    // fetch
+  }
 };
 
 app.use(userInteractionTracker, {

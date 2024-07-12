@@ -44,12 +44,16 @@ const app = createApp(App);
 const uploadLog: UploadLogFunction = (action, type, data) => {
   // 实现你的上传日志逻辑
   console.log(`Upload log: action=${action}, type=${type}, data=`, data);
+  // 比如，上传操作的持续时间（duration）
+  if (type === 'duration') {
+    // fetch
+  }
 };
 
 app.use(userInteractionTracker, {
   uploadLog,
   globalName: '$userTracker', // 可选，自定义全局变量名，默认为 '$userTracker'
-  enabled: true, // 可选，是否启用，默认为 false
+  enabled: true, // 可选，是否启用，默认为 false  NODE_ENV === 'production'
 });
 
 app.mount('#app');
