@@ -132,8 +132,8 @@ export default {
 
 | 方法    | 描述     | 参数       | 返回值         |
 | ------ | -------- | -------- | --------- |
-| `startAction(action: string, options?: any)`  | 开始记录一个操作  | `action` (字符串): 操作名称<br>`options` (可选, any): 开始操作的选项 | 无|
-| `endAction(action: string, options?: any) `    | 结束记录一个操作 | `action` (字符串): 操作名称<br>`options` (可选, any): 结束操作的选项 | 无  |
+| `startAction(action: string, options?: any)`  | 开始记录一个操作  | `action` (字符串): 操作名称<br>`options` (可选, any): 开始操作的额外信息 | 无|
+| `endAction(action: string, options?: any) `    | 结束记录一个操作 | `action` (字符串): 操作名称<br>`options` (可选, any): 结束操作的额外信息 | 无  |
 | `getPendingActions(action?: string) ` | 获取未完成的操作。如果传递 `action` 参数，返回该操作的详细信息；否则返回所有未完成的操作。 | `action` (可选, 字符串): 操作名称  | Object or Array |
 | `clearActions(actions?: string[]): void`  | 清除指定的操作记录。如果不传递参数，清除所有操作记录。  | `actions` (可选, 数组): 要清除的操作名称数组  | 无                      |
 
