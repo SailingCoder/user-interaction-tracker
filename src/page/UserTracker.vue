@@ -1,11 +1,17 @@
 <template>
     <div class="container">
-        <p>UserTracker</p>
-        <p>用户跟踪数据: {{ userTrackerData }}</p>
-        <p>当前未完成的操作数量: {{ pendingActionsCount }}</p>
-        <div class="box">
-            <button @click="handleStartAction">StartAction</button>
-            <button @click="handleEndAction">EndAction</button>
+        <div class="user-content">
+            <div class="user-row">
+                <p>UserTracker</p>
+                <p>当前未完成的操作数量: {{ pendingActionsCount }}</p>
+                <div class="box">
+                    <button @click="handleStartAction">StartAction</button>
+                    <button @click="handleEndAction">EndAction</button>
+                </div>
+            </div>
+            <div class="user-row">
+                <p>用户跟踪数据: <pre>{{ userTrackerData }}</pre></p>
+            </div>
         </div>
     </div>
 </template>
@@ -22,7 +28,7 @@ const tracker = new UserInteractionTracker({
     enabled: true,
     uploadLog: (action, type, data) => {
         console.log('uploadLog', action, type, data);
-        userTrackerData.value = JSON.stringify(data);
+        userTrackerData.value = data;
     }
 })
 
@@ -52,9 +58,19 @@ onMounted(() => {
 <style lang="less" scoped>
 .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
+    justify-content: center;
+    .user-content {
+        width: 800px;
+        display: flex;
+        margin-top: 100px;
+        align-items: center;
+        .user-row {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
 }
 .box {
     display: flex;

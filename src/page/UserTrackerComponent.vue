@@ -1,11 +1,17 @@
 <template>
     <div class="container">
-        <p>UserTrackerComponent Vue</p>
-        <p>用户跟踪数据: {{ userTrackerData }}</p>
-        <p>当前未完成的操作数量: {{ pendingActionsCount }}</p>
-        <div class="box">
-            <button @click="handleStartAction">StartAction</button>
-            <button @click="handleEndAction">EndAction</button>
+        <div class="user-content">
+            <div class="user-row">
+                <p>UserTrackerComponent Vue</p>
+                <p>当前未完成的操作数量: {{ pendingActionsCount }}</p>
+                <div class="box">
+                    <button @click="handleStartAction">StartAction</button>
+                    <button @click="handleEndAction">EndAction</button>
+                </div>
+            </div>
+            <div class="user-row">
+                <p>用户跟踪数据: <pre>{{ userTrackerData }}</pre></p>
+            </div>
         </div>
     </div>
 </template>
@@ -36,7 +42,7 @@ const handleStartAction = () => {
 
 // 结束操作
 const handleEndAction = () => {
-    tracker.endAction('action_name');
+    tracker.endAction('action_name', { code: 'success' });
     getPendingActions();
 };
 
@@ -49,9 +55,19 @@ onMounted(() => {
 <style lang="less" scoped>
 .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
+    justify-content: center;
+    .user-content {
+        width: 800px;
+        display: flex;
+        margin-top: 100px;
+        align-items: center;
+        .user-row {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
 }
 .box {
     display: flex;
