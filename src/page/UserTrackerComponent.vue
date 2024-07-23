@@ -4,9 +4,11 @@
             <div class="user-row">
                 <p>UserTrackerComponent Vue</p>
                 <p>当前未完成的操作数量: {{ pendingActionsCount }}</p>
-                <div class="box">
-                    <button @click="handleStartAction">StartAction</button>
-                    <button @click="handleEndAction">EndAction</button>
+                <div>
+                    <div class="box">
+                        <button @click="handleStartAction">StartAction</button>
+                        <button @click="handleEndAction">EndAction</button>
+                    </div>
                 </div>
             </div>
             <div class="user-row">

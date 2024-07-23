@@ -1,6 +1,6 @@
 type UploadLogFunction = (
     action: string,
-    type: 'duration' | 'endAction' | 'startAction',
+    type: 'duration' | 'endAction' | 'startAction' | 'track',
     data?: {
         duration: number,
         start: number | null,
@@ -25,6 +25,18 @@ class UserInteractionTracker {
         this.actions = new Map();
         this.uploadLog = options.uploadLog;
         this.enabled = options.enabled !== undefined ? options.enabled : false;
+    }
+
+    public track(action: string, options?: any): void {
+        if (!this.enabled) return;
+    
+        const interactionData = {
+          timestamp: Date.now(),
+          action,
+          options,
+        };
+
+        this.safeUploadLog(action, 'track', interactionData);
     }
 
     public startAction(action: string, options?: any): void {
@@ -136,7 +148,7 @@ class UserInteractionTracker {
         }); // 上传时不计算持续时间，传递持续时间为0
     }
 
-    private safeUploadLog(action: string, type: 'duration' | 'endAction' | 'startAction', data: any): void {
+    private safeUploadLog(action: string, type: 'duration' | 'endAction' | 'startAction' | 'track', data: any): void {
         try {
             this.uploadLog(action, type, data);
         } catch (error) {

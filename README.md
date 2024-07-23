@@ -108,6 +108,7 @@ const handleEndAction = () => {
 | `endAction(action: string, options?: any) `    | 结束记录一个操作 | `action` (字符串): 操作名称<br>`options` (可选, any): 结束操作的额外信息 | 无  |
 | `getPendingActions(action?: string) ` | 获取未完成的操作。如果传递 `action` 参数，返回该操作的详细信息；否则返回所有未完成的操作。 | `action` (可选, 字符串): 操作名称  | Object or Array |
 | `clearActions(actions?: string[]): void`  | 清除指定的操作记录。如果不传递参数，清除所有操作记录。  | `actions` (可选, 数组): 要清除的操作名称数组  | 无                      |
+| `track(action: string, options?: any) `    | 交互埋点 | `action` (字符串): 操作名称<br>`options` (可选, any): 额外信息 | 无  |
 
 
 `UploadLogFunction`
@@ -115,7 +116,7 @@ const handleEndAction = () => {
 ```typescript
 type UploadLogFunction = (
   action: string,
-  type: 'duration' | 'endAction' | 'startAction',
+  type: 'duration' | 'endAction' | 'startAction' | 'track',
   data?: {
     duration: number,
     start: number | null,

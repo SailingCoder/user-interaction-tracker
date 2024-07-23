@@ -22,7 +22,7 @@ import { UserInteractionTracker } from '../../package/index';
 
 // 反应式数据
 const pendingActionsCount = ref(0);
-const userTrackerData = ref('');
+const userTrackerData = ref<any>(null);
 
 const tracker = new UserInteractionTracker({
     enabled: true,
