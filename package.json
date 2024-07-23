@@ -1,6 +1,6 @@
 {
   "name": "user-interaction-tracker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "用户交互跟踪器 duration",
   "main": "dist/index.umd.js",
   "module": "dist/index.mjs",
