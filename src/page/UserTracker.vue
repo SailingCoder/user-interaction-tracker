@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <p>UserTracker</p>
         <p>用户跟踪数据: {{ userTrackerData }}</p>
         <p>当前未完成的操作数量: {{ pendingActionsCount }}</p>
         <div class="box">
@@ -10,17 +11,20 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance, ref, onMounted, inject, computed } from 'vue';
-import { useUserTrackerStore } from '@/stores/userTrackerStore';
-const userTrackerStore = useUserTrackerStore();
-
-
-const tracker = getCurrentInstance()?.appContext.config.globalProperties.$userTracker;
+import { ref, onMounted, inject, computed } from 'vue';
+import { UserInteractionTracker } from '../../package/index';
 
 // 反应式数据
 const pendingActionsCount = ref(0);
-// computed  serTrackerStore.userTrackerData
-const userTrackerData = computed(() => userTrackerStore.userTrackerData);
+const userTrackerData = ref('');
+
+const tracker = new UserInteractionTracker({
+    enabled: true,
+    uploadLog: (action, type, data) => {
+        console.log('uploadLog', action, type, data);
+        userTrackerData.value = JSON.stringify(data);
+    }
+})
 
 // 获取未完成操作的数量
 const getPendingActions = () => {

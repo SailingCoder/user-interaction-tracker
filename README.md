@@ -1,6 +1,6 @@
 # User Interaction Tracker
 
-用户交互跟踪器是一个用于跟踪用户行为和时间的库。它提供了一种轻量级的方式来记录用户的交互操作，如开始和结束某个操作的时间，以及操作的持续时间（duration）。
+用户交互跟踪器是一个用于跟踪用户行为和时间的库。它提供了一种轻量级的方式来记录用户的交互操作，支持Vue2、Vue3以及其他JavaScript框架。它提供了灵活的API和插件机制，方便集成到各种项目中。如：开始和结束某个操作的时间，以及操作的持续时间（duration）。
 
 ![npm version](https://img.shields.io/npm/v/user-interaction-tracker)
 
@@ -10,9 +10,9 @@
 ## 特性
 
 *   跟踪用户开始和结束操作的时间
-*   计算并记录操作的持续时间
+*   计算并记录操作的持续时间 duration
 *   支持自定义的上传日志函数
-*   支持在 Vue 2 和 Vue 3 项目中使用
+*   支持在 Vue 2 、 Vue 3 和 React 项目中使用，以及其他框架示例（如jQuery或原生JavaScript）
 *   操作简单：startAction、endAction，支持多个跟踪
 
 ## 安装
@@ -29,45 +29,32 @@ npm install user-interaction-tracker
 yarn add user-interaction-tracker
 ```
 
-## 使用方法
+## 简单示例（以 Vue 3 为例）
 
-### 在 Vue 项目中安装插件
+### 在 main.ts 中注册插件
 
 ```typescript
+// main.ts
 import { createApp } from 'vue';
 import App from './App.vue';
 import userInteractionTracker, { UploadLogFunction } from 'user-interaction-tracker';
 
 const app = createApp(App);
 
-// 示例上传日志函数
 const uploadLog: UploadLogFunction = (action, type, data) => {
-  // 实现你的上传日志逻辑
-  console.log(`Upload log: action=${action}, type=${type}, data=`, data);
-  // 比如，上传操作的持续时间（duration）
-  if (type === 'duration') {
-    // fetch
-  }
+  console.log(`Action: ${action}, Type: ${type}`, data);
 };
 
 app.use(userInteractionTracker, {
   uploadLog,
-  globalName: '$userTracker', // 可选，自定义全局变量名，默认为 '$userTracker'
-  enabled: true, // 可选，是否启用，默认为 false  NODE_ENV === 'production'
+  globalName: '$userTracker', // 可选，默认为'$userTracker'
+  enabled: true // 可选，默认为false
 });
 
 app.mount('#app');
 ```
 
-**注意：** 目前 type 支持`startAction`、`duration`、`endAction`三种类型。
-
-1. 当 `type` 为 `startAction`时，表示这个动作是一个计时开始的动作。
-2. 当 `type` 为 `duration`时，表示这个动作是一个持续性动作，有明确的开始时间和结束时间。（可以作为 duration 日志上传）
-3. 当 `type` 为 `endAction`时，表示这个动作只是一个交互的动作，没有开始时间。（代表 duration 计算失败了，也可作为交互埋点上传）
-
 ### 在组件中使用
-
-Vue 3 组件示例
 
 ```js
 <template>
@@ -93,32 +80,17 @@ const handleEndAction = () => {
 };
 </script>
 ```
-Vue 2 组件示例
 
-```js
-<template>
-  <div>
-    <button @click="handleStartAction">开始记录</button>
-    <button @click="handleEndAction">结束记录</button>
-  </div>
-</template>
+## 示例详情
 
-<script>
-export default {
-  data() {
-    return {};
-  },
-  methods: {
-    handleStartAction() {
-        this.$userTracker.startAction('action_name');
-    },
-    handleEndAction() {
-        this.$userTracker.endAction('action_name');
-    },
-  }
-};
-</script>
-```
+1、[Vue2 代码详细示例](https://github.com/SailingCoder/user-interaction-tracker/blob/main/doc/README_CN_VUE2.md)
+
+2、[Vue3 代码详细示例](https://github.com/SailingCoder/user-interaction-tracker/blob/main/doc/README_CN_VUE3.md)
+
+3、[React 代码详细示例](https://github.com/SailingCoder/user-interaction-tracker/blob/main/doc/README_CN_REACT.md)
+
+4、[其他框架示例（如jQuery或原生JavaScript）代码详细示例](https://github.com/SailingCoder/user-interaction-tracker/blob/main/doc/README_CN_OTHER.md)
+
 
 ## 配置选项
 

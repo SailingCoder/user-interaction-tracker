@@ -17,7 +17,9 @@
   "keywords": [
     "user",
     "interaction",
-    "tracker"
+    "tracker",
+    "duration",
+    "Duration"
   ],
   "dependencies": {
     "pinia": "^2.1.7",

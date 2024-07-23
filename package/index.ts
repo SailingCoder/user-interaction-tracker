@@ -21,6 +21,10 @@ const userInteractionTracker = {
 
 export default userInteractionTracker;
 
+export {
+  UserInteractionTracker
+}
+
 export type {
   UploadLogFunction
 }
